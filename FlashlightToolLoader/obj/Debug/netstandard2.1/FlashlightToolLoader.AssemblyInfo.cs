@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sniper1_1.FlashlightToolLoader")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+928dc0896f7665c4b60941dbd6cc8697d196191b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc32d0575ad39bbeab762f91e28d339a26f187be")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlashlightToolLoader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sniper1_1.FlashlightToolLoader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

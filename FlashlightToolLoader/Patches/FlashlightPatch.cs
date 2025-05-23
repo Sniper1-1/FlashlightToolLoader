@@ -58,6 +58,7 @@ namespace FlashlightToolLoader.Patches
             List<Item> flashlights = new List<Item>();
             foreach (Item item in StartOfRound.Instance.allItemsList.itemsList) //for all items in the game
             {
+                FlashlightToolLoader.Logger.LogDebug("Item: " + item.spawnPrefab.name); //debug log all items
                 if (IsFlashlight(item) && !IgnoreLights.Contains(item.spawnPrefab.name)) //if they are a flashlight and not in the ignore list
                 {
                     flashlights.Add(item);
