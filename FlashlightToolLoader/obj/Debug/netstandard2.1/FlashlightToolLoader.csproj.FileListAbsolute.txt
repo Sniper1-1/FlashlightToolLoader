@@ -1,0 +1,9 @@
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\bin\Debug\netstandard2.1\Sniper1_1.FlashlightToolLoader.deps.json
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\bin\Debug\netstandard2.1\Sniper1_1.FlashlightToolLoader.dll
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\FlashlightToolLoader.csproj.AssemblyReference.cache
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\MyPluginInfo.cs
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\FlashlightToolLoader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\FlashlightToolLoader.AssemblyInfoInputs.cache
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\FlashlightToolLoader.AssemblyInfo.cs
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\FlashlightToolLoader.csproj.CoreCompileInputs.cache
+C:\Users\Justi\GameDev\GitHub projects\LethalCompany\Code\GitHubVersions\FlashlightToolLoader\FlashlightToolLoader\obj\Debug\netstandard2.1\Sniper1_1.FlashlightToolLoader.dll
