@@ -99,7 +99,8 @@ namespace FlashlightToolLoader.Patches
                 // Instantiate a new copy so each player gets their own light
                 GameObject newLightObj = Object.Instantiate(lightTransform.gameObject);
                 Light lightComponent = newLightObj.GetComponent<Light>();
-                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: " + newLightObj.name + " of item: " + item);
+                lightComponent.name = item.spawnPrefab.name + " Light"; // Set a unique name for the light object
+                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: "+newLightObj.name+" of item: " + item);
                 return lightComponent;
             }
             else
