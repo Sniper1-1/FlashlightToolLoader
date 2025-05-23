@@ -13,6 +13,9 @@ namespace FlashlightToolLoader
         internal new static ManualLogSource Logger { get; private set; } = null!;
         internal static Harmony? Harmony { get; set; }
 
+        // The position and rotation of the vanilla light
+        public static Vector3 vanillaLightPos = new Vector3(0.206999943f, -0.526000381f, 0.475000262f);
+        public static Quaternion vanillaLightRot = new Quaternion(0f, -0.0208650213f, 0, 0.999782383f);
 
         private void Awake()
         {

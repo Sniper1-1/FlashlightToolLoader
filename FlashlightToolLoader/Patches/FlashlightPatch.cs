@@ -20,7 +20,7 @@ namespace FlashlightToolLoader.Patches
             //debug log print all items in the list
             foreach (Item light in flashlights)
             {
-                FlashlightToolLoader.Logger.LogDebug("Flashlight: " + light.spawnPrefab.name);
+                FlashlightToolLoader.Logger.LogDebug("Flashlight to be made: " + light.spawnPrefab.name);
             }
             //get vanilla helmet light array size
             int vanillaHelmetLightCount = __instance.allHelmetLights.Length;
@@ -35,9 +35,9 @@ namespace FlashlightToolLoader.Patches
                 //makes the new light a child of the HelmetLights object
                 try
                 {
-                    newLightObjects[i].transform.SetParent(__instance.helmetLight.transform, false);
-                    newLightObjects[i].transform.localPosition = Vector3.zero;
-                    newLightObjects[i].transform.localRotation = Quaternion.identity;
+                    newLightObjects[i].transform.SetParent(__instance.helmetLight.transform.parent.transform, false);
+                    newLightObjects[i].transform.localPosition = FlashlightToolLoader.vanillaLightPos;
+                    newLightObjects[i].transform.localRotation = FlashlightToolLoader.vanillaLightRot;
                     FlashlightToolLoader.Logger.LogDebug("Set parent of light: " + newLightObjects[i].name + " to: " + __instance.helmetLight.name);
                 }
                 catch (System.Exception e)
@@ -49,7 +49,6 @@ namespace FlashlightToolLoader.Patches
             //adds the new lights to the allHelmetLights list
             __instance.allHelmetLights=__instance.allHelmetLights.AddRangeToArray(newLightObjects);
             
-
         }
 
         public static List<Item> GetValidItems()
@@ -72,6 +71,7 @@ namespace FlashlightToolLoader.Patches
             // Check if the item has FlashlightItem component
             if (item.spawnPrefab.GetComponent<FlashlightItem>()!=null)
             {
+                FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item);
                 return true;
             }
             else
