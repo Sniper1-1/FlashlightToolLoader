@@ -38,7 +38,7 @@ namespace FlashlightToolLoader.Patches
                     newLightObjects[i].transform.SetParent(__instance.helmetLight.transform.parent.transform, false);
                     newLightObjects[i].transform.localPosition = FlashlightToolLoader.vanillaLightPos;
                     newLightObjects[i].transform.localRotation = FlashlightToolLoader.vanillaLightRot;
-                    FlashlightToolLoader.Logger.LogDebug("Set parent of light: " + newLightObjects[i].name + " to: " + __instance.helmetLight.name);
+                    FlashlightToolLoader.Logger.LogDebug("Set parent of light: " + newLightObjects[i].name + " to: " + __instance.helmetLight.transform.parent.name);
                 }
                 catch (System.Exception e)
                 {
@@ -56,9 +56,9 @@ namespace FlashlightToolLoader.Patches
             //list of flashlights to ignore
             List<string> IgnoreLights = new List<string> { "BBFlashlight", "FlashlightItem", "LaserPointer" };
             List<Item> flashlights = new List<Item>();
-            foreach (Item item in StartOfRound.Instance.allItemsList.itemsList)
+            foreach (Item item in StartOfRound.Instance.allItemsList.itemsList) //for all items in the game
             {
-                if (IsFlashlight(item) && !IgnoreLights.Contains(item.spawnPrefab.name))
+                if (IsFlashlight(item) && !IgnoreLights.Contains(item.spawnPrefab.name)) //if they are a flashlight and not in the ignore list
                 {
                     flashlights.Add(item);
                 }
