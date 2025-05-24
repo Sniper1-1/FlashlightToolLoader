@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FlashlightToolLoader.Patches
 {
-
+    //patching StartOfRound instead of PlayerControllerB awake like originally so that LethalLib has time to load its items
     [HarmonyPatch(typeof(StartOfRound))]
     public class StartOfRoundPatch
     {
@@ -18,7 +18,7 @@ namespace FlashlightToolLoader.Patches
             // Loop through all players and call InitiateHelmetLight
             foreach (PlayerControllerB player in StartOfRound.Instance.allPlayerScripts)
             {
-                HelmetLightPatch.InitiateHelmetLight(player);
+                HelmetLightPatch.InitiateHelmetLights(player);
             }
         }
     }
@@ -27,7 +27,7 @@ namespace FlashlightToolLoader.Patches
     public class HelmetLightPatch
     {
         
-        public static void InitiateHelmetLight(PlayerControllerB __instance)
+        public static void InitiateHelmetLights(PlayerControllerB __instance)
         {
             FlashlightToolLoader.Logger.LogDebug("InitiateHelmetLight called on player: " + __instance);
 
@@ -36,7 +36,7 @@ namespace FlashlightToolLoader.Patches
             //debug log print all items in the list
             foreach (Item light in flashlights)
             {
-                FlashlightToolLoader.Logger.LogDebug("Flashlight to be made: " + light.spawnPrefab.name);
+                FlashlightToolLoader.Logger.LogDebug("Flashlight to be made: " + light.name);
             }
             //get vanilla helmet light array size
             int vanillaHelmetLightCount = __instance.allHelmetLights.Length;
@@ -70,12 +70,14 @@ namespace FlashlightToolLoader.Patches
         public static List<Item> GetValidItems()
         {
             //list of flashlights to ignore
-            List<string> IgnoreLights = new List<string> { "BBFlashlight", "FlashlightItem", "LaserPointer" };
+            List<string> IgnoreLights = new List<string>(FlashlightToolLoader.BoundConfig.Blacklist.Value
+        .Split(new[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries));
+
             List<Item> flashlights = new List<Item>();
             foreach (Item item in StartOfRound.Instance.allItemsList.itemsList) //for all items in the game
             {
-                FlashlightToolLoader.Logger.LogDebug("Item: " + item.spawnPrefab.name); //debug log all items
-                if (IsFlashlight(item) && !IgnoreLights.Contains(item.spawnPrefab.name)) //if they are a flashlight and not in the ignore list
+                FlashlightToolLoader.Logger.LogDebug("Item: " + item.name); //debug log all items
+                if (IsFlashlight(item) && !IgnoreLights.Contains(item.name)) //if they are a flashlight and not in the ignore list
                 {
                     flashlights.Add(item);
                 }
