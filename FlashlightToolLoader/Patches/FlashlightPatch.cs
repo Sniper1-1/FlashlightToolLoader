@@ -20,13 +20,18 @@ namespace FlashlightToolLoader.Patches
             {
                 HelmetLightPatch.InitiateHelmetLights(player);
             }
+            
+
+            HelmetLightPatch.FixShipItems(); //fix flashlighs on ship to be the same as their prefabs
         }
     }
 
     
     public class HelmetLightPatch
     {
-        
+        // Dictionary to store the flashlight objects and their corresponding IDs
+        public static Dictionary<GameObject, int> LightToID = new Dictionary<GameObject, int>();
+
         public static void InitiateHelmetLights(PlayerControllerB __instance)
         {
             FlashlightToolLoader.Logger.LogDebug("InitiateHelmetLight called on player: " + __instance);
@@ -43,6 +48,8 @@ namespace FlashlightToolLoader.Patches
             FlashlightToolLoader.Logger.LogDebug("Vanilla Helmet Light Count: " + vanillaHelmetLightCount);
             // Create an array of light object the same size as the flashlights list
             Light[] newLightObjects = (Light[])(object)new Light[flashlights.Count];
+
+            LightToID.Clear(); //clear the dictionary to avoid duplicates
             for (int i=0; i<flashlights.Count; i++)
             {
                 newLightObjects[i] = CreateLight(flashlights[i]);
@@ -60,6 +67,10 @@ namespace FlashlightToolLoader.Patches
                 {
                     FlashlightToolLoader.Logger.LogError("Failed to set parent of light: " + e.Message);
                 }
+
+                //add the light to the dictionary
+                LightToID[flashlights[i].spawnPrefab] = i + vanillaHelmetLightCount;
+                FlashlightToolLoader.Logger.LogDebug("Added light: " + newLightObjects[i].name + " to dictionary with ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
             }
 
             //adds the new lights to the allHelmetLights list
@@ -126,6 +137,27 @@ namespace FlashlightToolLoader.Patches
             {
                 FlashlightToolLoader.Logger.LogDebug("No Light found");
                 return null;
+            }
+        }
+
+
+
+
+        public static void FixShipItems() {
+            List<GrabbableObject> shipItems = new List<GrabbableObject>(GameObject.FindObjectsOfType<GrabbableObject>());
+            
+            FlashlightToolLoader.Logger.LogDebug("GrabbableObjects found: " + shipItems.Count);
+
+            foreach (GrabbableObject item in shipItems) //for all items in the ship
+            {
+                FlashlightToolLoader.Logger.LogDebug("Item in ship: " + item.name); //debug log all items
+
+                // Check if the item has FlashlightItem component and if its prefab is in the dictionary, if so then the flashlight in the ship is given that ID
+                if (item.GetComponent<FlashlightItem>() != null && LightToID.TryGetValue(item.itemProperties.spawnPrefab, out int newId))
+                {
+                    item.GetComponent<FlashlightItem>().flashlightTypeID = newId;
+                    FlashlightToolLoader.Logger.LogDebug($"Updated flashlightTypeID for {item.name} to {newId}");
+                }
             }
         }
     }
