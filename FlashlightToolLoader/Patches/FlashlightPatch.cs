@@ -5,12 +5,28 @@ using UnityEngine;
 
 namespace FlashlightToolLoader.Patches
 {
-    
-    [HarmonyPatch(typeof(PlayerControllerB))]
-    public class HelmetLightPatch
+
+    [HarmonyPatch(typeof(StartOfRound))]
+    public class StartOfRoundPatch
     {
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlayerControllerB), "Awake")]
+        [HarmonyPatch("Start")]
+        public static void AfterStartOfRound()
+        {
+            FlashlightToolLoader.Logger.LogDebug("StartOfRound.Start postfix: Initializing helmet lights for all players.");
+
+            // Loop through all players and call InitiateHelmetLight
+            foreach (PlayerControllerB player in StartOfRound.Instance.allPlayerScripts)
+            {
+                HelmetLightPatch.InitiateHelmetLight(player);
+            }
+        }
+    }
+
+    
+    public class HelmetLightPatch
+    {
+        
         public static void InitiateHelmetLight(PlayerControllerB __instance)
         {
             FlashlightToolLoader.Logger.LogDebug("InitiateHelmetLight called on player: " + __instance);
