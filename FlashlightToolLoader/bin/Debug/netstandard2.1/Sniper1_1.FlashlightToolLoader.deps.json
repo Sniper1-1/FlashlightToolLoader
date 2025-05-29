@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "Sniper1_1.FlashlightToolLoader/1.0.0": {
+      "Sniper1_1.FlashlightToolLoader/1.0.1": {
         "dependencies": {
           "BepInEx.Analyzers": "1.0.8",
           "BepInEx.Core": "5.4.21",
@@ -370,7 +370,7 @@
     }
   },
   "libraries": {
-    "Sniper1_1.FlashlightToolLoader/1.0.0": {
+    "Sniper1_1.FlashlightToolLoader/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

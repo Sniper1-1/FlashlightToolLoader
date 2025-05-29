@@ -75,7 +75,14 @@ namespace FlashlightToolLoader.Patches
 
             //adds the new lights to the allHelmetLights list
             __instance.allHelmetLights=__instance.allHelmetLights.AddRangeToArray(newLightObjects);
-            
+
+            //logs the new allHelmetLights array and their indexes
+            FlashlightToolLoader.Logger.LogDebug("New allHelmetLights array size: " + __instance.allHelmetLights.Length);
+            for (int i = 0; i < __instance.allHelmetLights.Length; i++)
+            {
+                FlashlightToolLoader.Logger.LogDebug("allHelmetLights[" + i + "]: " + __instance.allHelmetLights[i].name);
+            }
+
         }
 
         public static List<Item> GetValidItems()
