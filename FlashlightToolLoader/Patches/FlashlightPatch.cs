@@ -20,13 +20,13 @@ namespace FlashlightToolLoader.Patches
             {
                 HelmetLightPatch.InitiateHelmetLights(player);
             }
-            
+
 
             HelmetLightPatch.FixShipItems(); //fix flashlighs on ship to be the same as their prefabs
         }
     }
 
-    
+
     public class HelmetLightPatch
     {
         // Dictionary to store the flashlight objects and their corresponding IDs
@@ -36,7 +36,7 @@ namespace FlashlightToolLoader.Patches
         {
             FlashlightToolLoader.Logger.LogDebug("InitiateHelmetLight called on player: " + __instance);
 
-            List<Item> flashlights= GetValidItems();
+            List<Item> flashlights = GetValidItems();
 
             //debug log print all items in the list
             foreach (Item light in flashlights)
@@ -50,10 +50,10 @@ namespace FlashlightToolLoader.Patches
             Light[] newLightObjects = (Light[])(object)new Light[flashlights.Count];
 
             LightToID.Clear(); //clear the dictionary to avoid duplicates
-            for (int i=0; i<flashlights.Count; i++)
+            for (int i = 0; i < flashlights.Count; i++)
             {
                 newLightObjects[i] = CreateLight(flashlights[i]);
-                flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID = i+vanillaHelmetLightCount; //set the flashlight type ID to the index of the light in the array + the size of the vanilla helmet light array to avoid overlaps
+                flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID = i + vanillaHelmetLightCount; //set the flashlight type ID to the index of the light in the array + the size of the vanilla helmet light array to avoid overlaps
                 FlashlightToolLoader.Logger.LogDebug("Flashlight Type ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
                 //makes the new light a child of the HelmetLights object
                 try
@@ -74,7 +74,7 @@ namespace FlashlightToolLoader.Patches
             }
 
             //adds the new lights to the allHelmetLights list
-            __instance.allHelmetLights=__instance.allHelmetLights.AddRangeToArray(newLightObjects);
+            __instance.allHelmetLights = __instance.allHelmetLights.AddRangeToArray(newLightObjects);
 
             //logs the new allHelmetLights array and their indexes
             FlashlightToolLoader.Logger.LogDebug("New allHelmetLights array size: " + __instance.allHelmetLights.Length);
@@ -106,7 +106,7 @@ namespace FlashlightToolLoader.Patches
         public static bool IsFlashlight(Item item)
         {
             // Check if the item has FlashlightItem component
-            if (item.spawnPrefab.GetComponent<FlashlightItem>()!=null)
+            if (item.spawnPrefab.GetComponent<FlashlightItem>() != null)
             {
                 FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item);
                 return true;
@@ -137,7 +137,7 @@ namespace FlashlightToolLoader.Patches
                 GameObject newLightObj = Object.Instantiate(lightTransform.gameObject);
                 Light lightComponent = newLightObj.GetComponent<Light>();
                 lightComponent.name = item.spawnPrefab.name + " Light"; // Set a unique name for the light object
-                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: "+newLightObj.name+" of item: " + item);
+                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: " + newLightObj.name + " of item: " + item);
                 return lightComponent;
             }
             else
@@ -152,7 +152,7 @@ namespace FlashlightToolLoader.Patches
 
         public static void FixShipItems() {
             List<GrabbableObject> shipItems = new List<GrabbableObject>(GameObject.FindObjectsOfType<GrabbableObject>());
-            
+
             FlashlightToolLoader.Logger.LogDebug("GrabbableObjects found: " + shipItems.Count);
 
             foreach (GrabbableObject item in shipItems) //for all items in the ship
@@ -166,6 +166,18 @@ namespace FlashlightToolLoader.Patches
                     FlashlightToolLoader.Logger.LogDebug($"Updated flashlightTypeID for {item.name} to {newId}");
                 }
             }
+        }
+    }
+
+    //patch to dissable the LightUtility mod from doing anything
+    [HarmonyPatch(typeof(huluobolightutility.Huluobolightutility), "Playerlight")]
+    public class BlockLightUtilityPatch
+    {
+        [HarmonyPrefix]
+        public static bool StopLightUtility()
+        {
+            FlashlightToolLoader.Logger.LogDebug("LightUtilityPatch: PlayerControllerB Awake prefix called. Disabling LightUtility mod functionality. YOU SHALL NOT PASS!");
+            return false;
         }
     }
 

@@ -1,13 +1,15 @@
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
+using FlashlightToolLoader.Patches;
 using GameNetcodeStuff;
 using HarmonyLib;
 using UnityEngine;
-using BepInEx.Configuration;
 
 namespace FlashlightToolLoader
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+    [BepInDependency("Huluobolightutility", BepInDependency.DependencyFlags.SoftDependency)]
     public class FlashlightToolLoader : BaseUnityPlugin
     {
         public static FlashlightToolLoader Instance { get; private set; } = null!;
@@ -38,7 +40,16 @@ namespace FlashlightToolLoader
 
             Logger.LogDebug("Patching...");
 
-            Harmony.PatchAll();
+            Harmony.PatchAll(typeof(StartOfRoundPatch));
+
+            try
+            {
+                Harmony.PatchAll(typeof(BlockLightUtilityPatch));
+            }
+            catch
+            {
+                Logger.LogWarning("Did not find Lightutility. Skipping compat patch.");
+            }
 
             Logger.LogDebug("Finished patching!");
         }

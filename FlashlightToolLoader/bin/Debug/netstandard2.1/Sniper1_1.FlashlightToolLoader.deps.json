@@ -7,13 +7,14 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "Sniper1_1.FlashlightToolLoader/1.0.1": {
+      "Sniper1_1.FlashlightToolLoader/1.0.2": {
         "dependencies": {
           "BepInEx.Analyzers": "1.0.8",
           "BepInEx.Core": "5.4.21",
           "BepInEx.PluginInfoProps": "2.1.0",
           "LethalCompany.GameLibs.Steam": "69.0.1-ngd.0",
-          "UnityEngine.Modules": "2022.3.9"
+          "UnityEngine.Modules": "2022.3.9",
+          "Huluobolightutility": "0.0.0.0"
         },
         "runtime": {
           "Sniper1_1.FlashlightToolLoader.dll": {}
@@ -366,11 +367,19 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "UnityEngine.Modules/2022.3.9": {}
+      "UnityEngine.Modules/2022.3.9": {},
+      "Huluobolightutility/0.0.0.0": {
+        "runtime": {
+          "Huluobolightutility.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
-    "Sniper1_1.FlashlightToolLoader/1.0.1": {
+    "Sniper1_1.FlashlightToolLoader/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -654,6 +663,11 @@
       "sha512": "sha512-sSxqZjd05U0NWlX+eappdlsEuXFvDRHkUaClDVTocGRzCmIwNvgGJIPh22lGklIpNZ3cJZneYJkIUnEIazR8VA==",
       "path": "unityengine.modules/2022.3.9",
       "hashPath": "unityengine.modules.2022.3.9.nupkg.sha512"
+    },
+    "Huluobolightutility/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

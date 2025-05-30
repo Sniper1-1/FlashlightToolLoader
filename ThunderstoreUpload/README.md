@@ -6,7 +6,7 @@ A mod designed to be an improved version of hu_luo_bo_ya's [Lightutility](https:
 <details>
 <summary>For Players</summary>
 
-This mod should be ready to use as is. If you encounter a custom flashlight item that this mod does not work well with, you may blacklist the item in the config. The name that goes there is the name you should see printed in the logs. While this mod is compatible with Lightutility, it is recommended to blacklist the flashlights that it creates as this could lead to unexpected errors.<br>
+This mod should be ready to use as is. If you encounter a custom flashlight item that this mod does not work well with, you may blacklist the item in the config. The name that goes there is the name you should see printed in the logs. While this mod is compatible with Lightutility, this mod dissables its functionality to avoid unexpected errors.<br>
 
 </details>
 

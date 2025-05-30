@@ -4,6 +4,6 @@ namespace FlashlightToolLoader
     {
         public const string PLUGIN_GUID = "Sniper1_1.FlashlightToolLoader";
         public const string PLUGIN_NAME = "FlashlightToolLoader";
-        public const string PLUGIN_VERSION = "1.0.1";
+        public const string PLUGIN_VERSION = "1.0.2";
     }
 }
