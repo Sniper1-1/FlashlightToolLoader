@@ -5,3 +5,6 @@
 
 # Visual Studio cache directory
 .vs/
+
+FlashlightToolLoader/bin/
+FlashlightToolLoader/obj/
