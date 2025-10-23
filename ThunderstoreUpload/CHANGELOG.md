@@ -1,6 +1,14 @@
 
 ---
 
+**<details><summary>Version 1.0.3</summary>**
+
+ - Fixed an issue that I don't know how never happened before with checking items that have no prefab (Like the unused, unfinished cardboard box item in vanilla).
+ 
+ </details>
+ 
+---
+
 **<details><summary>Version 1.0.2</summary>**
 
  - Now blocks [Lightutility](https://thunderstore.io/c/lethal-company/p/hu_luo_bo_ya/Lightutility/) from running to avoid issuess. PLEASE REMOVE LIGHTUTILITY LIGHTS FROM THIS MOD'S BLACKLIST AS I HANDLE THEM NOW!

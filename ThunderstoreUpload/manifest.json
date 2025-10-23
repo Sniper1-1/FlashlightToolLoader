@@ -1,6 +1,6 @@
 {
 	"name":"FlashlightToolLoader",
-	"version_number": "1.0.2",
+	"version_number": "1.0.3",
 	"website_url":"https://github.com/Sniper1-1/FlashlightToolLoader.git",
 	"description":"A tool to dynamically load custom flashlights.",
 	"dependencies":[
