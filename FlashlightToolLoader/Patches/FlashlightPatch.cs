@@ -105,17 +105,25 @@ namespace FlashlightToolLoader.Patches
 
         public static bool IsFlashlight(Item item)
         {
-            // Check if the item has FlashlightItem component
-            if (item.spawnPrefab.GetComponent<FlashlightItem>() != null)
+            try
             {
-                FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item);
-                return true;
+                // Check if the item has FlashlightItem component
+                if (item.spawnPrefab.GetComponent<FlashlightItem>() != null)
+                {
+                    FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch
             {
+                FlashlightToolLoader.Logger.LogError("Error checking if item is flashlight. It may be missing a prefab. If you are the dev, please fix! Otherwise, safe to ignore this.");
                 return false;
-            }
 
+            }
         }
 
         public static Light CreateLight(Item item)
