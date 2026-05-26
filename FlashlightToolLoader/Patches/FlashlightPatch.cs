@@ -46,35 +46,43 @@ namespace FlashlightToolLoader.Patches
             //get vanilla helmet light array size
             int vanillaHelmetLightCount = __instance.allHelmetLights.Length;
             FlashlightToolLoader.Logger.LogDebug("Vanilla Helmet Light Count: " + vanillaHelmetLightCount);
-            // Create an array of light object the same size as the flashlights list
-            Light[] newLightObjects = (Light[])(object)new Light[flashlights.Count];
+            // Create a list of light object for the new lights
+            List<Light> newLightObjects = new List<Light>();
 
             LightToID.Clear(); //clear the dictionary to avoid duplicates
             for (int i = 0; i < flashlights.Count; i++)
             {
-                newLightObjects[i] = CreateLight(flashlights[i]);
-                flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID = i + vanillaHelmetLightCount; //set the flashlight type ID to the index of the light in the array + the size of the vanilla helmet light array to avoid overlaps
-                FlashlightToolLoader.Logger.LogDebug("Flashlight Type ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
-                //makes the new light a child of the HelmetLights object
-                try
+                Light newLight = CreateLight(flashlights[i]);
+                if (newLight != null) //if the light was successfully created from the current flashlight item
                 {
-                    newLightObjects[i].transform.SetParent(__instance.helmetLight.transform.parent.transform, false);
-                    newLightObjects[i].transform.localPosition = FlashlightToolLoader.vanillaLightPos;
-                    newLightObjects[i].transform.localRotation = FlashlightToolLoader.vanillaLightRot;
-                    FlashlightToolLoader.Logger.LogDebug("Set parent of light: " + newLightObjects[i].name + " to: " + __instance.helmetLight.transform.parent.name);
-                }
-                catch (System.Exception e)
-                {
-                    FlashlightToolLoader.Logger.LogError("Failed to set parent of light: " + e.Message);
-                }
+                    flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID = newLightObjects.Count + vanillaHelmetLightCount; //set the flashlight type ID to the num of currently made new lights + the size of the vanilla helmet light array to avoid overlaps
+                    FlashlightToolLoader.Logger.LogDebug("Flashlight Type ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
+                    //makes the new light a child of the HelmetLights object
+                    try
+                    {
+                        newLight.transform.SetParent(__instance.helmetLight.transform.parent.transform, false);
+                        newLight.transform.localPosition = FlashlightToolLoader.vanillaLightPos;
+                        newLight.transform.localRotation = FlashlightToolLoader.vanillaLightRot;
+                        FlashlightToolLoader.Logger.LogDebug("Set parent of light: " + newLight.name + " to: " + __instance.helmetLight.transform.parent.name);
+                    }
+                    catch (System.Exception e)
+                    {
+                        FlashlightToolLoader.Logger.LogError("Failed to set parent of light: " + e.Message);
+                    }
 
-                //add the light to the dictionary
-                LightToID[flashlights[i].spawnPrefab] = i + vanillaHelmetLightCount;
-                FlashlightToolLoader.Logger.LogDebug("Added light: " + newLightObjects[i].name + " to dictionary with ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
+                    //add the light to the dictionary
+                    LightToID[flashlights[i].spawnPrefab] = newLightObjects.Count + vanillaHelmetLightCount;
+                    FlashlightToolLoader.Logger.LogDebug("Added light: " + newLight.name + " to dictionary with ID: " + flashlights[i].spawnPrefab.GetComponent<FlashlightItem>().flashlightTypeID);
+                    newLightObjects.Add(newLight); //add the new light to the list of new light objects
+                }
+                else
+                {
+                    FlashlightToolLoader.Logger.LogWarning("Light for flashlight: " + flashlights[i].name + " was not created successfully and will be skipped.");
+                }
             }
 
             //adds the new lights to the allHelmetLights list
-            __instance.allHelmetLights = __instance.allHelmetLights.AddRangeToArray(newLightObjects);
+            __instance.allHelmetLights = __instance.allHelmetLights.AddRangeToArray(newLightObjects.ToArray());
 
             //logs the new allHelmetLights array and their indexes
             FlashlightToolLoader.Logger.LogDebug("New allHelmetLights array size: " + __instance.allHelmetLights.Length);
