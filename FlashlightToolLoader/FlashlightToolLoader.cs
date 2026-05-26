@@ -2,7 +2,6 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using FlashlightToolLoader.Patches;
-using GameNetcodeStuff;
 using HarmonyLib;
 using UnityEngine;
 
