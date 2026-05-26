@@ -1,6 +1,14 @@
 
 ---
 
+**<details><summary>Version 1.0.4</summary>**
+
+ - Fixed an issue that caused invalid flashlights to break the creation of following flashlights.
+ 
+ </details>
+ 
+---
+
 **<details><summary>Version 1.0.3</summary>**
 
  - Fixed an issue that I don't know how never happened before with checking items that have no prefab (Like the unused, unfinished cardboard box item in vanilla).
