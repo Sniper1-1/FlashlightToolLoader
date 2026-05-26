@@ -110,7 +110,7 @@ namespace FlashlightToolLoader.Patches
                 // Check if the item has FlashlightItem component
                 if (item.spawnPrefab.GetComponent<FlashlightItem>() != null)
                 {
-                    FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item);
+                    FlashlightToolLoader.Logger.LogDebug("Item is a flashlight: " + item.name);
                     return true;
                 }
                 else
@@ -145,12 +145,12 @@ namespace FlashlightToolLoader.Patches
                 GameObject newLightObj = Object.Instantiate(lightTransform.gameObject);
                 Light lightComponent = newLightObj.GetComponent<Light>();
                 lightComponent.name = item.spawnPrefab.name + " Light"; // Set a unique name for the light object
-                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: " + newLightObj.name + " of item: " + item);
+                FlashlightToolLoader.Logger.LogDebug("Instantiated Light: " + newLightObj.name + " of item: " + item.name);
                 return lightComponent;
             }
             else
             {
-                FlashlightToolLoader.Logger.LogDebug("No Light found");
+                FlashlightToolLoader.Logger.LogDebug("No Light found on item: " + item.name);
                 return null;
             }
         }
